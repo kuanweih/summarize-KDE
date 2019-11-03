@@ -81,15 +81,13 @@ if __name__ == '__main__':
     d['s1_deg'] = np.array(s1_degs)
     d['im_name'] = np.array(im_names)
 
-
-
     df = pd.DataFrame(d).sort_values(by=['sig'], ascending=False)
     df = df.reset_index(drop=True)
 
 
     for idx, row in df.iterrows():
         dist = np.sqrt(dist2(df['ra'][:idx], df['dec'][:idx], row['ra'], row['dec']))
-        mask = (0 < dist) & (dist < 2. * row['s1_deg'])
+        mask = dist < 2. * row['s1_deg']
         mask = mask & (row['dwarf']==df['dwarf'][:idx])
         if np.sum(mask) > 0:    # skip same target
             continue
