@@ -86,6 +86,9 @@ if __name__ == '__main__':
 
 
     for idx, row in df.iterrows():
+        # if (row['sig'] < 5) | (row['sig'] >= 5.2):
+        # if 'Sculptor' not in row['dwarf']:
+        #     continue
         dist = np.sqrt(dist2(df['ra'][:idx], df['dec'][:idx], row['ra'], row['dec']))
         mask = dist < 2. * row['s1_deg']
         mask = mask & (row['dwarf']==df['dwarf'][:idx])
